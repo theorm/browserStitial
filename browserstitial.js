@@ -2,6 +2,8 @@ function browserStitial(error, data) {
   this.error = error;
   this.data = data;
 
+  var self = this;
+
   this.createBrowserStitial = function(error, data) {
     var body = document.body;
         bsEl = document.querySelector('#bs-container')
@@ -29,9 +31,11 @@ function browserStitial(error, data) {
 
   this.destroyBrowserStitial = function() {
     var body = document.body;
-        bsEl = document.querySelector('#bs-container');
+        bsEl = document.querySelector('#bs-container'),
+        bsWrapper = document.querySelector('#bs-wrapper')
 
     body.removeChild(bsEl);
+    body.removeChild(bsWrapper);
 
   }
 
@@ -176,9 +180,9 @@ function browserStitial(error, data) {
         bsWrapper = document.querySelector('#bs-wrapper'),
         bsClose = bsEl.querySelector('.bs-close');
 
-    bsClose.addEventListener('click', this.destroyBrowserStitial);
+    bsClose.addEventListener('click', self.destroyBrowserStitial);
 
-    bsWrapper.addEventListener('click', this.destroyBrowserStitial);
+    bsWrapper.addEventListener('click', self.destroyBrowserStitial);
 
   }
 
