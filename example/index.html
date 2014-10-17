@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/crel/2.1.5/crel.min.js"></script>
+    <script src="browserstitial.js"></script>
+  </head>
+
+  <body>
+    <script>
+      var error = false;
+      var data = {
+        "messagetext" : "You%20get%20a%20coupon%20for%20being%20awesome!",
+        "messagecontent": "This is a fantastic product! <br /><br /> Go and buy it :-)",
+        "appkey": "2afc468a6a7be18564ac8ac74f814308",
+        "campaignid": 245,
+        "templateid": 18871,
+        "splitid": 311,
+        "phash": "stgaaazk6P",
+        "errorcode": 0,
+        "errorinfo": "success"
+      }
+
+      browserStitial = new browserStitial(error, data);
+
+      // Or call it as a normal function
+      // browserStitial(error, data);
+    </script>
+  </body>
+</html>
