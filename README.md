@@ -31,13 +31,13 @@ Just another Alert
     ```
 
   - Init the BrowserStitial:  
-    ``` browserStitial = new browserStitial(error, data); ```
+    ``` bs = new browserStitial(error, data); ```
   
   This will crete an Alert.
 
 ##Commands / Methods Usage  
   - Create a new Alert:  
-    ``` browserStitial.createBrowserStitial(false, data) ```
+    ``` bs.createBrowserStitial(false, data) ```
 
   - Destroy the current Alert:  
-    ``` browserStitial.destroyBrowserStitial(); ```
+    ``` bs.destroyBrowserStitial(); ```

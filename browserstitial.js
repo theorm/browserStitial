@@ -5,8 +5,8 @@ function browserStitial(error, data) {
   var self = this;
 
   this.createBrowserStitial = function(error, data) {
-    var body = document.body;
-        bsEl = document.querySelector('#bs-container')
+    var body = document.body,
+        bsEl = document.querySelector('#bs-container');
 
     this.error = error;
     this.data = data;
@@ -30,9 +30,9 @@ function browserStitial(error, data) {
   }
 
   this.destroyBrowserStitial = function() {
-    var body = document.body;
+    var body = document.body,
         bsEl = document.querySelector('#bs-container'),
-        bsWrapper = document.querySelector('#bs-wrapper')
+        bsWrapper = document.querySelector('#bs-wrapper');
 
     body.removeChild(bsEl);
     body.removeChild(bsWrapper);
@@ -72,6 +72,7 @@ function browserStitial(error, data) {
               crel('p', {'class':'bs-messagecontent'}),
               crel('div', {'class':'bs-footer'})
             );
+
     }
 
     body.appendChild(wrapper);
@@ -85,8 +86,8 @@ function browserStitial(error, data) {
 
     if (error) {
       var bsEl = document.querySelector('#bs-container'),
-        bsError = bsEl.querySelector('.bs-error'),
-        error = error
+          bsError = bsEl.querySelector('.bs-error'),
+          error = error;
 
       bsError.innerHTML = error;
 
@@ -116,7 +117,7 @@ function browserStitial(error, data) {
   }
 
   var applyStyleElements = function() {
-    var body = document.body;
+    var body = document.body,
         bsWrapper = document.querySelector('#bs-wrapper'),
         bsEl = document.querySelector('#bs-container'),
         bsClose = bsEl.querySelector('.bs-close'),
