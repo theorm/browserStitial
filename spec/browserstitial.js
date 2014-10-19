@@ -37,10 +37,37 @@ describe('BrowserStitial', function() {
 
     });
 
-    it('All BrowserStitial should be destroyed', function() {
+    it('The BrowserStitial should be defined', function() {
       var bsEl = document.querySelector('#bs-container');
 
       expect(bsEl).toBeDefined();
+
+    });
+
+  });
+
+  describe('destroyBrowserStitial', function() {
+    var error = false;
+    var data = {
+      "messagetext" : "message text",
+      "messagecontent": "message content",
+      "appkey": "2afc468a6a7be18564ac8ac74f814308",
+      "campaignid": 245,
+      "templateid": 18871,
+      "splitid": 311,
+      "phash": "stgaaazk6P",
+      "errorcode": 0,
+      "errorinfo": "success"
+    }
+    var bs = new browserStitial(error, data);
+
+    bs.destroyBrowserStitial();
+
+    it('The BrowserStitial should be null', function() {
+      var bsEl = document.querySelector('#bs-container');
+
+      expect(bsEl).toBeNull();
+
     });
 
   });
