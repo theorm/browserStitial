@@ -11,19 +11,19 @@ describe('BrowserStitial', function() {
   });
 
   describe('Constructor createBrowserStitial', function() {
-    var error = false;
-    var data = {
-      "messagetext" : "message text",
-      "messagecontent": "message content",
-      "appkey": "2afc468a6a7be18564ac8ac74f814308",
-      "campaignid": 245,
-      "templateid": 18871,
-      "splitid": 311,
-      "phash": "stgaaazk6P",
-      "errorcode": 0,
-      "errorinfo": "success"
-    }
-    var bs = new browserStitial(error, data);
+    var error = false,
+        data = {
+          "messagetext" : "message text",
+          "messagecontent": "message content",
+          "appkey": "2afc468a6a7be18564ac8ac74f814308",
+          "campaignid": 245,
+          "templateid": 18871,
+          "splitid": 311,
+          "phash": "stgaaazk6P",
+          "errorcode": 0,
+          "errorinfo": "success"
+        },
+        bs = new browserStitial(error, data);
 
     it('Check error value', function() {
 
@@ -47,28 +47,92 @@ describe('BrowserStitial', function() {
   });
 
   describe('destroyBrowserStitial', function() {
-    var error = false;
-    var data = {
-      "messagetext" : "message text",
-      "messagecontent": "message content",
-      "appkey": "2afc468a6a7be18564ac8ac74f814308",
-      "campaignid": 245,
-      "templateid": 18871,
-      "splitid": 311,
-      "phash": "stgaaazk6P",
-      "errorcode": 0,
-      "errorinfo": "success"
-    }
-    var bs = new browserStitial(error, data);
-
-    bs.destroyBrowserStitial();
 
     it('The BrowserStitial should be null', function() {
-      var bsEl = document.querySelector('#bs-container');
+      var error = false,
+          data = {
+            "messagetext" : "message text",
+            "messagecontent": "message content",
+            "appkey": "2afc468a6a7be18564ac8ac74f814308",
+            "campaignid": 245,
+            "templateid": 18871,
+            "splitid": 311,
+            "phash": "stgaaazk6P",
+            "errorcode": 0,
+            "errorinfo": "success"
+          },
+          bsEl;
+
+      bs = new browserStitial(error, data);
+
+      bs.destroyBrowserStitial();
+
+      bsEl = document.querySelector('#bs-container');
 
       expect(bsEl).toBeNull();
 
     });
+
+  });
+
+  describe('Style', function() {
+
+    it('The Style should be applied', function() {
+      var error = false,
+          data = {
+            "messagetext" : "message text",
+            "messagecontent": "message content",
+            "appkey": "2afc468a6a7be18564ac8ac74f814308",
+            "campaignid": 245,
+            "templateid": 18871,
+            "splitid": 311,
+            "phash": "stgaaazk6P",
+            "errorcode": 0,
+            "errorinfo": "success"
+          },
+          bsEl;
+
+        bs = new browserStitial(error, data);
+
+        bsEl = document.querySelector('#bs-container');
+
+        expect(bsEl.style.position).toBe('absolute');
+
+      });
+
+  });
+
+  describe('Listeners', function() {
+
+    it('The Listeners should be active', function() {
+      var error = false,
+          data = {
+            "messagetext" : "message text",
+            "messagecontent": "message content",
+            "appkey": "2afc468a6a7be18564ac8ac74f814308",
+            "campaignid": 245,
+            "templateid": 18871,
+            "splitid": 311,
+            "phash": "stgaaazk6P",
+            "errorcode": 0,
+            "errorinfo": "success"
+          },
+          bsEl,
+          bsWrapper,
+          bsClose;
+
+        bs = new browserStitial(error, data);
+
+        bsEl = document.querySelector('#bs-container');
+        bsClose = bsEl.querySelector('.bs-close');
+
+        bsClose.click();
+
+        bsEl = document.querySelector('#bs-container');
+
+        expect(bsEl).toBeNull();
+
+      });
 
   });
 

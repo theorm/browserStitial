@@ -17,15 +17,7 @@ function browserStitial(error, data) {
 
     }
 
-    if (error) {
-
-      showError(error);
-
-    } else {
-
-      showData(error, data);
-
-    }
+    showResult(this.error, this.data);
 
   }
 
@@ -39,13 +31,7 @@ function browserStitial(error, data) {
 
   }
 
-  var showError = function(error) {
-
-    createElements(error);
-
-  }
-
-  var showData = function(error, data) {
+  var showResult = function(error, data) {
 
     createElements(error, data);
 
@@ -53,27 +39,14 @@ function browserStitial(error, data) {
 
   var createElements = function(error, data) {
     var body = document.body;
-
-    if (error) {
-      var wrapper = crel('div', {'id':'bs-wrapper'});
-          bs =
-            crel('div', {'id':'bs-container'},
-              crel('a', {'class':'bs-close'}),
-              crel('h1', {'class':'bs-error'}),
-              crel('div', {'class':'bs-footer'})
-            );
-
-    } else {
-      var wrapper = crel('div', {'id':'bs-wrapper'});
-          bs =
-            crel('div', {'id':'bs-container'},
-              crel('a', {'class':'bs-close'}),
-              crel('h2', {'class':'bs-messagetext'}),
-              crel('p', {'class':'bs-messagecontent'}),
-              crel('div', {'class':'bs-footer'})
-            );
-
-    }
+    var wrapper = crel('div', {'id':'bs-wrapper'});
+        bs =
+          crel('div', {'id':'bs-container'},
+            crel('a', {'class':'bs-close'}),
+            crel('h2', {'class':'bs-messagetext'}),
+            crel('p', {'class':'bs-messagecontent'}),
+            crel('div', {'class':'bs-footer'})
+          );
 
     body.appendChild(wrapper);
     body.appendChild(bs);
@@ -86,10 +59,14 @@ function browserStitial(error, data) {
 
     if (error) {
       var bsEl = document.querySelector('#bs-container'),
-          bsError = bsEl.querySelector('.bs-error'),
-          error = error;
+          bsClose = bsEl.querySelector('.bs-close'),
+          bsMessageText = bsEl.querySelector('.bs-messagetext'),
+          bsMessageContent = bsEl.querySelector('.bs-messagecontent'),
+          errorTitle = error,
+          errorInfo = data.errorinfo;
 
-      bsError.innerHTML = error;
+      bsMessageText.innerHTML = errorTitle;
+      bsMessageContent.innerHTML = errorInfo;
 
     } else if (data) {
       var bsEl = document.querySelector('#bs-container'),
@@ -106,17 +83,18 @@ function browserStitial(error, data) {
           errorcode = data.errorcode,
           errorinfo = data.errorinfo;
 
-      bsClose.innerHTML = 'X';
       bsMessageText.innerHTML = messagetext;
       bsMessageContent.innerHTML = messagecontent;
 
     }
 
-    applyStyleElements();
+    bsClose.innerHTML = 'X';
+
+    applyStyleElements(error, data);
 
   }
 
-  var applyStyleElements = function() {
+  var applyStyleElements = function(error, data) {
     var body = document.body,
         bsWrapper = document.querySelector('#bs-wrapper'),
         bsEl = document.querySelector('#bs-container'),
@@ -152,6 +130,10 @@ function browserStitial(error, data) {
     bsClose.style.color = '#ffffff';
     bsClose.style.cursor = 'pointer';
 
+    bsFooter.style.height = '54px';
+    bsFooter.style.boxSizing = 'border-box';
+    bsFooter.style.borderTop = '1px solid #cccccc';
+
     bsMessageText.style.backgroundColor = '#f8b547';
     bsMessageText.style.color = '#ffffff';
     bsMessageText.style.padding = '10px';
@@ -167,10 +149,6 @@ function browserStitial(error, data) {
     bsMessageContent.style.fontSize = '1.2em';
     bsMessageContent.style.lineHeight = '1.2em';
     bsMessageContent.style.height = '240px';
-
-    bsFooter.style.height = '54px';
-    bsEl.style.boxSizing = 'border-box';
-    bsFooter.style.borderTop = '1px solid #cccccc';
 
     startListeners();
 
