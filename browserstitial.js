@@ -13,7 +13,7 @@ function browserStitial(error, data) {
 
     if (bsEl) {
 
-      this.destroyBrowserStitial();
+      this.destroyBrowserStitial(true);
 
     }
 
@@ -21,13 +21,21 @@ function browserStitial(error, data) {
 
   }
 
-  this.destroyBrowserStitial = function() {
+  this.destroyBrowserStitial = function(forceClosing) {
     var body = document.body,
         bsEl = document.querySelector('#bs-container'),
         bsWrapper = document.querySelector('#bs-wrapper');
 
-    body.removeChild(bsEl);
-    body.removeChild(bsWrapper);
+    if (forceClosing == true) {
+
+      body.removeChild(bsEl);
+      body.removeChild(bsWrapper);
+
+    } else {
+
+      fade('out');
+
+    }
 
   }
 
@@ -117,40 +125,98 @@ function browserStitial(error, data) {
     bsEl.style.left = '50%';
     bsEl.style.top = '50%';
     bsEl.style.margin = '-200px 0 0 -300px';
-    bsEl.style.padding = '40px 30px';
+    bsEl.style.padding = '40px 0';
     bsEl.style.boxSizing = 'border-box';
-    bsEl.style.backgroundColor = '#eeeeee';
+    bsEl.style.backgroundColor = '#dddddd';
     bsEl.style.borderRadius = '10px';
+    bsEl.style.border = "1px solid #cccccc";
     bsEl.style.fontSize = '16px';
     bsEl.style.fontFamily = 'Arial';
+    bsEl.style.boxShadow = "10px 20px 30px #cccccc";
+    bsEl.style.background= '-webkit-linear-gradient(top, #ffffff, #e6e6e6)';
 
     bsClose.style.position = 'absolute';
     bsClose.style.right = '10px';
     bsClose.style.top = '10px';
-    bsClose.style.color = '#ffffff';
+    bsClose.style.color = '#cccccc';
     bsClose.style.cursor = 'pointer';
+    bsClose.style.fontWeight = 'bold';
 
     bsFooter.style.height = '54px';
     bsFooter.style.boxSizing = 'border-box';
     bsFooter.style.borderTop = '1px solid #cccccc';
 
-    bsMessageText.style.backgroundColor = '#f8b547';
     bsMessageText.style.color = '#ffffff';
     bsMessageText.style.padding = '10px';
     bsMessageText.style.margin = 0;
     bsMessageText.style.fontSize = '1.6em';
     bsMessageText.style.lineHeight = '1em';
+    bsMessageText.style.background= '-webkit-linear-gradient(top, #f3a547, #ffc547)';
 
     bsMessageContent.style.display = 'table-cell';
     bsMessageContent.style.color = '#666666';
     bsMessageContent.style.verticalAlign = 'middle';
     bsMessageContent.style.padding = '10px';
     bsMessageContent.style.margin = 0;
-    bsMessageContent.style.fontSize = '1.2em';
-    bsMessageContent.style.lineHeight = '1.2em';
+    bsMessageContent.style.fontSize = '1em';
+    bsMessageContent.style.lineHeight = '1.4em';
     bsMessageContent.style.height = '240px';
 
+    fade('in');
+
     startListeners();
+
+  }
+
+  var fade = function(how) {
+    var body = document.body,
+        bsEl = document.querySelector('#bs-container'),
+        bsWrapper = document.querySelector('#bs-wrapper');
+
+    var fadeIn = function() {
+
+      bsEl.style.opacity = +bsEl.style.opacity + 0.10;
+
+      if (+bsEl.style.opacity < 1) {
+
+        (window.requestAnimationFrame && requestAnimationFrame(fadeIn)) ||
+          setTimeout(fadeIn, 16)
+
+      }
+
+    };
+
+    var fadeOut = function() {
+
+      bsEl.style.opacity = +bsEl.style.opacity - 0.10;
+
+      if (+bsEl.style.opacity > 0) {
+
+        (window.requestAnimationFrame && requestAnimationFrame(fadeOut)) ||
+          setTimeout(fadeOut, 16)
+
+      }
+
+      //console.log(bsEl.style.opacity)
+
+      if (+bsEl.style.opacity == 0) {
+
+        body.removeChild(bsEl);
+        body.removeChild(bsWrapper);
+
+      }
+
+    };
+
+    if (how === 'in') {
+
+      fadeIn();
+
+    } else {
+
+      fadeOut();
+
+    }
 
   }
 

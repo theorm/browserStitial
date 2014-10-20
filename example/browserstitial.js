@@ -13,7 +13,7 @@ function browserStitial(error, data) {
 
     if (bsEl) {
 
-      this.destroyBrowserStitial();
+      this.destroyBrowserStitial(true);
 
     }
 
@@ -21,13 +21,21 @@ function browserStitial(error, data) {
 
   }
 
-  this.destroyBrowserStitial = function() {
+  this.destroyBrowserStitial = function(forceClosing) {
     var body = document.body,
         bsEl = document.querySelector('#bs-container'),
         bsWrapper = document.querySelector('#bs-wrapper');
 
-    body.removeChild(bsEl);
-    body.removeChild(bsWrapper);
+    if (forceClosing == true) {
+
+      body.removeChild(bsEl);
+      body.removeChild(bsWrapper);
+
+    } else {
+
+      fade('out');
+
+    }
 
   }
 
@@ -154,7 +162,61 @@ function browserStitial(error, data) {
     bsMessageContent.style.lineHeight = '1.4em';
     bsMessageContent.style.height = '240px';
 
+    fade('in');
+
     startListeners();
+
+  }
+
+  var fade = function(how) {
+    var body = document.body,
+        bsEl = document.querySelector('#bs-container'),
+        bsWrapper = document.querySelector('#bs-wrapper');
+
+    var fadeIn = function() {
+
+      bsEl.style.opacity = +bsEl.style.opacity + 0.10;
+
+      if (+bsEl.style.opacity < 1) {
+
+        (window.requestAnimationFrame && requestAnimationFrame(fadeIn)) ||
+          setTimeout(fadeIn, 16)
+
+      }
+
+    };
+
+    var fadeOut = function() {
+
+      bsEl.style.opacity = +bsEl.style.opacity - 0.10;
+
+      if (+bsEl.style.opacity > 0) {
+
+        (window.requestAnimationFrame && requestAnimationFrame(fadeOut)) ||
+          setTimeout(fadeOut, 16)
+
+      }
+
+      //console.log(bsEl.style.opacity)
+
+      if (+bsEl.style.opacity == 0) {
+
+        body.removeChild(bsEl);
+        body.removeChild(bsWrapper);
+
+      }
+
+    };
+
+    if (how === 'in') {
+
+      fadeIn();
+
+    } else {
+
+      fadeOut();
+
+    }
 
   }
 
