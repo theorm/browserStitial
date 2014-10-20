@@ -117,37 +117,41 @@ function browserStitial(error, data) {
     bsEl.style.left = '50%';
     bsEl.style.top = '50%';
     bsEl.style.margin = '-200px 0 0 -300px';
-    bsEl.style.padding = '40px 30px';
+    bsEl.style.padding = '40px 0';
     bsEl.style.boxSizing = 'border-box';
-    bsEl.style.backgroundColor = '#eeeeee';
+    bsEl.style.backgroundColor = '#dddddd';
     bsEl.style.borderRadius = '10px';
+    bsEl.style.border = "1px solid #cccccc";
     bsEl.style.fontSize = '16px';
     bsEl.style.fontFamily = 'Arial';
+    bsEl.style.boxShadow = "10px 20px 30px #cccccc";
+    bsEl.style.background= '-webkit-linear-gradient(top, #ffffff, #e6e6e6)';
 
     bsClose.style.position = 'absolute';
     bsClose.style.right = '10px';
     bsClose.style.top = '10px';
-    bsClose.style.color = '#ffffff';
+    bsClose.style.color = '#cccccc';
     bsClose.style.cursor = 'pointer';
+    bsClose.style.fontWeight = 'bold';
 
     bsFooter.style.height = '54px';
     bsFooter.style.boxSizing = 'border-box';
     bsFooter.style.borderTop = '1px solid #cccccc';
 
-    bsMessageText.style.backgroundColor = '#f8b547';
     bsMessageText.style.color = '#ffffff';
     bsMessageText.style.padding = '10px';
     bsMessageText.style.margin = 0;
     bsMessageText.style.fontSize = '1.6em';
     bsMessageText.style.lineHeight = '1em';
+    bsMessageText.style.background= '-webkit-linear-gradient(top, #f3a547, #ffc547)';
 
     bsMessageContent.style.display = 'table-cell';
     bsMessageContent.style.color = '#666666';
     bsMessageContent.style.verticalAlign = 'middle';
     bsMessageContent.style.padding = '10px';
     bsMessageContent.style.margin = 0;
-    bsMessageContent.style.fontSize = '1.2em';
-    bsMessageContent.style.lineHeight = '1.2em';
+    bsMessageContent.style.fontSize = '1em';
+    bsMessageContent.style.lineHeight = '1.4em';
     bsMessageContent.style.height = '240px';
 
     startListeners();
