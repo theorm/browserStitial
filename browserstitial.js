@@ -56,7 +56,10 @@ function browserStitial(error, data) {
             crel('div', {'class':'bs-footer'})
           );
 
-    body.appendChild(wrapper);
+    document.body.firstChild.parentNode.insertBefore(
+      wrapper, document.body.firstChild
+    );
+
     body.appendChild(bs);
 
     bindElements(error, data);
@@ -129,11 +132,11 @@ function browserStitial(error, data) {
     bsEl.style.boxSizing = 'border-box';
     bsEl.style.backgroundColor = '#dddddd';
     bsEl.style.borderRadius = '10px';
-    bsEl.style.border = "1px solid #cccccc";
+    bsEl.style.border = "1px solid #aaaaaa";
     bsEl.style.fontSize = '16px';
     bsEl.style.fontFamily = 'Arial';
-    bsEl.style.boxShadow = "10px 20px 30px #cccccc";
-    bsEl.style.background= '-webkit-linear-gradient(top, #ffffff, #e6e6e6)';
+    bsEl.style.boxShadow = "10px 20px 30px #666666";
+    bsEl.style.background= '-webkit-linear-gradient(top, #ffffff, #a6a6a6)';
 
     bsClose.style.position = 'absolute';
     bsClose.style.right = '10px';
@@ -196,8 +199,6 @@ function browserStitial(error, data) {
           setTimeout(fadeOut, 16)
 
       }
-
-      //console.log(bsEl.style.opacity)
 
       if (+bsEl.style.opacity == 0) {
 
