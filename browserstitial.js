@@ -191,7 +191,7 @@ function browserStitial(error, data) {
     bsMessageContent.style.lineHeight = '1.4em';
     bsMessageContent.style.height = '240px';
 
-    this.resizeBrowserStitial()
+    self.resizeBrowserStitial();
 
     fade('in');
 

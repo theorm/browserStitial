@@ -11,7 +11,7 @@ describe('BrowserStitial', function() {
   });
 
   describe('Constructor createBrowserStitial', function() {
-    var error = false,
+    var error = null,
         data = {
           "messagetext" : "message text",
           "messagecontent": "message content",
@@ -131,6 +131,55 @@ describe('BrowserStitial', function() {
         bsEl = document.querySelector('#bs-container');
 
         expect(bsEl).toBeNull();
+
+      });
+
+  });
+
+  describe('resizeBrowserStitial (activate advanced JS)', function() {
+
+    it('Check if Window listener is working', function() {
+      var error = false,
+          data = {
+            "messagetext" : "message text",
+            "messagecontent": "message content",
+            "appkey": "2afc468a6a7be18564ac8ac74f814308",
+            "campaignid": 245,
+            "templateid": 18871,
+            "splitid": 311,
+            "phash": "stgaaazk6P",
+            "errorcode": 0,
+            "errorinfo": "success"
+          },
+          bsEl,
+          bsWrapper,
+          bsClose;
+
+        bs = new browserStitial(error, data);
+
+        bsEl = document.querySelector('#bs-container');
+
+        switch(true) {
+
+          case (window.innerWidth >= 701):
+
+                expect(bsEl.style.width).toBe('600px');
+
+                break;
+
+          case (window.innerWidth >= 500):
+
+                expect(bsEl.style.width).toBe('500px');
+
+                break;
+
+          case (window.innerWidth >= 300):
+
+                expect(bsEl.style.width).toBe('300px');
+
+                break;
+
+        }
 
       });
 
