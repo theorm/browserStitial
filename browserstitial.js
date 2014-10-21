@@ -8,8 +8,8 @@ function browserStitial(error, data) {
     var body = document.body,
         bsEl = document.querySelector('#bs-container');
 
-    this.error = error;
-    this.data = data;
+    this.error = error || null;
+    this.data = data || null;
 
     if (bsEl) {
 
@@ -34,6 +34,36 @@ function browserStitial(error, data) {
     } else {
 
       fade('out');
+
+    }
+
+  }
+
+  this.resizeBrowserStitial = function() {
+    var win = window,
+        bsEl = document.querySelector('#bs-container');
+
+    if (win.innerWidth >= 701) {
+
+      bsEl.style.width = '600px';
+      bsEl.style.margin = '-200px 0 0 -300px';
+      bsEl.style.fontSize = '16px';
+
+    }
+
+    if (win.innerWidth <= 700) {
+
+      bsEl.style.width = '500px';
+      bsEl.style.margin = '-200px 0 0 -250px';
+      bsEl.style.fontSize = '14px';
+
+    }
+
+    if (win.innerWidth <= 540) {
+
+      bsEl.style.width = '300px';
+      bsEl.style.margin = '-200px 0 0 -150px';
+      bsEl.style.fontSize = '12px';
 
     }
 
@@ -73,11 +103,9 @@ function browserStitial(error, data) {
           bsClose = bsEl.querySelector('.bs-close'),
           bsMessageText = bsEl.querySelector('.bs-messagetext'),
           bsMessageContent = bsEl.querySelector('.bs-messagecontent'),
-          errorTitle = error,
-          errorInfo = data.errorinfo;
+          errorTitle = error;
 
       bsMessageText.innerHTML = errorTitle;
-      bsMessageContent.innerHTML = errorInfo;
 
     } else if (data) {
       var bsEl = document.querySelector('#bs-container'),
@@ -121,7 +149,6 @@ function browserStitial(error, data) {
     bsWrapper.style.position = 'absolute';
     bsWrapper.style.zIndex = 9998;
 
-    bsEl.style.width = '600px';
     bsEl.style.height = '400px';
     bsEl.style.position = 'absolute';
     bsEl.style.zIndex = 9999;
@@ -133,7 +160,6 @@ function browserStitial(error, data) {
     bsEl.style.backgroundColor = '#dddddd';
     bsEl.style.borderRadius = '10px';
     bsEl.style.border = "1px solid #aaaaaa";
-    bsEl.style.fontSize = '16px';
     bsEl.style.fontFamily = 'Arial';
     bsEl.style.boxShadow = "10px 20px 30px #666666";
     bsEl.style.background= '-webkit-linear-gradient(top, #ffffff, #a6a6a6)';
@@ -164,6 +190,8 @@ function browserStitial(error, data) {
     bsMessageContent.style.fontSize = '1em';
     bsMessageContent.style.lineHeight = '1.4em';
     bsMessageContent.style.height = '240px';
+
+    this.resizeBrowserStitial()
 
     fade('in');
 
@@ -222,13 +250,16 @@ function browserStitial(error, data) {
   }
 
   var startListeners = function() {
-    var bsEl = document.querySelector('#bs-container'),
+    var win = window,
+        bsEl = document.querySelector('#bs-container'),
         bsWrapper = document.querySelector('#bs-wrapper'),
         bsClose = bsEl.querySelector('.bs-close');
 
     bsClose.addEventListener('click', self.destroyBrowserStitial);
 
     bsWrapper.addEventListener('click', self.destroyBrowserStitial);
+
+    win.addEventListener('resize', self.resizeBrowserStitial);
 
   }
 
