@@ -96,7 +96,7 @@ describe('BrowserStitial', function() {
 
         bsEl = document.querySelector('#bs-container');
 
-        expect(bsEl.style.position).toBe('absolute');
+        expect(bsEl.style.position).toBe('fixed');
 
       });
 
