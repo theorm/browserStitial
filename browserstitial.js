@@ -252,7 +252,7 @@ function browserStitial(error, data, container) {
 
     var fadeOut = function() {
 
-      bsEl.style.opacity = +bsEl.style.opacity - 0.10;
+      bsEl.style.opacity = +bsEl.style.opacity - 0.20;
 
       if (+bsEl.style.opacity > 0) {
 
@@ -261,7 +261,8 @@ function browserStitial(error, data, container) {
 
       }
 
-      if (+bsEl.style.opacity == 0) {
+
+      if (+bsEl.style.opacity <= 0) {
 
         if (self.container) {
           var container = document.querySelector(self.container);
