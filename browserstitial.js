@@ -149,16 +149,16 @@ function browserStitial(error, data) {
     bsWrapper.style.position = 'absolute';
     bsWrapper.style.zIndex = 9998;
 
-    bsEl.style.height = '400px';
+    bsEl.style.height = '300px';
     bsEl.style.position = 'absolute';
     bsEl.style.zIndex = 9999;
     bsEl.style.left = '50%';
-    bsEl.style.top = '50%';
-    bsEl.style.margin = '-200px 0 0 -300px';
+    bsEl.style.bottom = '0';
+    bsEl.style.margin = '0 0 0 -300px';
     bsEl.style.padding = '40px 0';
     bsEl.style.boxSizing = 'border-box';
     bsEl.style.backgroundColor = '#dddddd';
-    bsEl.style.borderRadius = '10px';
+    bsEl.style.borderRadius = '10px 10px 0 0';
     bsEl.style.border = "1px solid #aaaaaa";
     bsEl.style.fontFamily = 'Arial';
     bsEl.style.boxShadow = "10px 20px 30px #666666";
@@ -189,7 +189,7 @@ function browserStitial(error, data) {
     bsMessageContent.style.margin = 0;
     bsMessageContent.style.fontSize = '1em';
     bsMessageContent.style.lineHeight = '1.4em';
-    bsMessageContent.style.height = '240px';
+    bsMessageContent.style.height = '140px';
 
     self.resizeBrowserStitial();
 
