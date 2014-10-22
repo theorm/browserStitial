@@ -1,15 +1,18 @@
-function browserStitial(error, data) {
+
+function browserStitial(error, data, container) {
   this.error = error;
   this.data = data;
+  this.container = container;
 
   var self = this;
 
-  this.createBrowserStitial = function(error, data) {
+  this.createBrowserStitial = function(error, data, container) {
     var body = document.body,
         bsEl = document.querySelector('#bs-container');
 
     this.error = error || null;
     this.data = data || null;
+    this.container = container || null;
 
     if (bsEl) {
 
@@ -17,19 +20,30 @@ function browserStitial(error, data) {
 
     }
 
-    showResult(this.error, this.data);
+    showResult(this.error, this.data, this.container);
 
   }
 
   this.destroyBrowserStitial = function(forceClosing) {
-    var body = document.body,
+    var win = window,
+        body = document.body,
         bsEl = document.querySelector('#bs-container'),
         bsWrapper = document.querySelector('#bs-wrapper');
 
     if (forceClosing == true) {
 
-      body.removeChild(bsEl);
-      body.removeChild(bsWrapper);
+      if (this.container) {
+        var container = document.querySelector(this.container);
+
+        container.removeChild(bsEl);
+        container.removeChild(bsWrapper);
+
+      } else {
+
+        bsEl.parentNode.removeChild(bsEl);
+        bsWrapper.parentNode.removeChild(bsWrapper);
+
+      }
 
     } else {
 
@@ -37,45 +51,58 @@ function browserStitial(error, data) {
 
     }
 
+    win.removeEventListener('resize', resizeBrowserStitial, true);
+
   }
 
-  this.resizeBrowserStitial = function() {
+  var resizeBrowserStitial = function() {
     var win = window,
         bsEl = document.querySelector('#bs-container');
 
-    if (win.innerWidth >= 701) {
+    if (!self.container) {
 
-      bsEl.style.width = '600px';
-      bsEl.style.margin = '-200px 0 0 -300px';
-      bsEl.style.fontSize = '16px';
+      if (win.innerWidth >= 701) {
 
-    }
+        bsEl.style.width = '600px';
+        bsEl.style.margin = '0 0 0 -300px';
+        bsEl.style.fontSize = '16px';
 
-    if (win.innerWidth <= 700) {
+      }
 
-      bsEl.style.width = '500px';
-      bsEl.style.margin = '-200px 0 0 -250px';
-      bsEl.style.fontSize = '14px';
+      if (win.innerWidth <= 700) {
 
-    }
+        bsEl.style.width = '500px';
+        bsEl.style.margin = '0 0 0 -250px';
+        bsEl.style.fontSize = '14px';
 
-    if (win.innerWidth <= 540) {
+      }
 
-      bsEl.style.width = '300px';
-      bsEl.style.margin = '-200px 0 0 -150px';
-      bsEl.style.fontSize = '12px';
+      if (win.innerWidth <= 540) {
+
+        bsEl.style.width = '300px';
+        bsEl.style.margin = '0 0 0 -150px';
+        bsEl.style.fontSize = '12px';
+
+      }
+
+    } else {
+
+      bsEl.style.position = 'absolute';
+      bsEl.style.width = '240px';
+      bsEl.style.margin = '0 0 0 -120px';
+      bsEl.style.fontSize = '10px';
 
     }
 
   }
 
-  var showResult = function(error, data) {
+  var showResult = function(error, data, container) {
 
-    createElements(error, data);
+    createElements(error, data, container);
 
   }
 
-  var createElements = function(error, data) {
+  var createElements = function(error, data, container) {
     var body = document.body;
     var wrapper = crel('div', {'id':'bs-wrapper'});
         bs =
@@ -86,33 +113,39 @@ function browserStitial(error, data) {
             crel('div', {'class':'bs-footer'})
           );
 
-    document.body.firstChild.parentNode.insertBefore(
-      wrapper, document.body.firstChild
-    );
+    if (container) {
+      var container = document.querySelector(container);
 
-    body.appendChild(bs);
+      container.appendChild(wrapper);
+      container.appendChild(bs);
+
+    } else {
+
+      document.body.firstChild.parentNode.insertBefore(
+        wrapper, document.body.firstChild
+      );
+
+      body.appendChild(bs);
+
+    }
 
     bindElements(error, data);
 
   }
 
   var bindElements = function(error, data) {
+    var bsEl = document.querySelector('#bs-container'),
+        bsClose = bsEl.querySelector('.bs-close'),
+        bsMessageText = bsEl.querySelector('.bs-messagetext'),
+        bsMessageContent = bsEl.querySelector('.bs-messagecontent');
 
     if (error) {
-      var bsEl = document.querySelector('#bs-container'),
-          bsClose = bsEl.querySelector('.bs-close'),
-          bsMessageText = bsEl.querySelector('.bs-messagetext'),
-          bsMessageContent = bsEl.querySelector('.bs-messagecontent'),
-          errorTitle = error;
+      var errorTitle = error;
 
       bsMessageText.innerHTML = errorTitle;
 
     } else if (data) {
-      var bsEl = document.querySelector('#bs-container'),
-          bsClose = bsEl.querySelector('.bs-close'),
-          bsMessageText = bsEl.querySelector('.bs-messagetext'),
-          bsMessageContent = bsEl.querySelector('.bs-messagecontent'),
-          messagetext = decodeURIComponent(data.messagetext),
+      var messagetext = decodeURIComponent(data.messagetext),
           messagecontent = data.messagecontent,
           appkey = data.appkey,
           campaignid = data.campaignid,
@@ -150,7 +183,7 @@ function browserStitial(error, data) {
     bsWrapper.style.zIndex = 9998;
 
     bsEl.style.height = '300px';
-    bsEl.style.position = 'absolute';
+    bsEl.style.position = 'fixed';
     bsEl.style.zIndex = 9999;
     bsEl.style.left = '50%';
     bsEl.style.bottom = '0';
@@ -171,7 +204,7 @@ function browserStitial(error, data) {
     bsClose.style.cursor = 'pointer';
     bsClose.style.fontWeight = 'bold';
 
-    bsFooter.style.height = '54px';
+    bsFooter.style.height = '20px';
     bsFooter.style.boxSizing = 'border-box';
     bsFooter.style.borderTop = '1px solid #cccccc';
 
@@ -189,9 +222,9 @@ function browserStitial(error, data) {
     bsMessageContent.style.margin = 0;
     bsMessageContent.style.fontSize = '1em';
     bsMessageContent.style.lineHeight = '1.4em';
-    bsMessageContent.style.height = '140px';
+    bsMessageContent.style.height = '174px';
 
-    self.resizeBrowserStitial();
+    resizeBrowserStitial();
 
     fade('in');
 
@@ -230,8 +263,18 @@ function browserStitial(error, data) {
 
       if (+bsEl.style.opacity == 0) {
 
-        body.removeChild(bsEl);
-        body.removeChild(bsWrapper);
+        if (self.container) {
+          var container = document.querySelector(self.container);
+
+          container.removeChild(bsEl);
+          container.removeChild(bsWrapper);
+
+        } else {
+
+          body.removeChild(bsEl);
+          body.removeChild(bsWrapper);
+
+        }
 
       }
 
@@ -259,10 +302,14 @@ function browserStitial(error, data) {
 
     bsWrapper.addEventListener('click', self.destroyBrowserStitial);
 
-    win.addEventListener('resize', self.resizeBrowserStitial);
+    if (!self.container) {
+
+      win.addEventListener('resize', resizeBrowserStitial, true);
+
+    }
 
   }
 
-  return this.createBrowserStitial(this.error, this.data);
+  return this.createBrowserStitial(this.error, this.data, this.container);
 
 }
