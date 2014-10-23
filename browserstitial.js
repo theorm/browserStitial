@@ -1,4 +1,3 @@
-
 function browserStitial(error, data, container) {
   this.error = error;
   this.data = data;
@@ -108,6 +107,7 @@ function browserStitial(error, data, container) {
         bs =
           crel('div', {'id':'bs-container'},
             crel('a', {'class':'bs-close'}),
+            crel('a', {'class':'bs-event'}),
             crel('h2', {'class':'bs-messagetext'}),
             crel('p', {'class':'bs-messagecontent'}),
             crel('div', {'class':'bs-footer'})
@@ -136,6 +136,7 @@ function browserStitial(error, data, container) {
   var bindElements = function(error, data) {
     var bsEl = document.querySelector('#bs-container'),
         bsClose = bsEl.querySelector('.bs-close'),
+        bsEvent = bsEl.querySelector('.bs-event'),
         bsMessageText = bsEl.querySelector('.bs-messagetext'),
         bsMessageContent = bsEl.querySelector('.bs-messagecontent');
 
@@ -162,6 +163,8 @@ function browserStitial(error, data, container) {
 
     bsClose.innerHTML = 'X';
 
+    bsEvent.innerHTML = 'Thanks';
+
     applyStyleElements(error, data);
 
   }
@@ -171,6 +174,7 @@ function browserStitial(error, data, container) {
         bsWrapper = document.querySelector('#bs-wrapper'),
         bsEl = document.querySelector('#bs-container'),
         bsClose = bsEl.querySelector('.bs-close'),
+        bsEvent = bsEl.querySelector('.bs-event'),
         bsMessageText = bsEl.querySelector('.bs-messagetext'),
         bsMessageContent = bsEl.querySelector('.bs-messagecontent'),
         bsFooter = bsEl.querySelector('.bs-footer');
@@ -182,13 +186,13 @@ function browserStitial(error, data, container) {
     bsWrapper.style.position = 'absolute';
     bsWrapper.style.zIndex = 9998;
 
-    bsEl.style.height = '300px';
+    //bsEl.style.height = '300px';
     bsEl.style.position = 'fixed';
     bsEl.style.zIndex = 9999;
     bsEl.style.left = '50%';
     bsEl.style.bottom = '0';
     bsEl.style.margin = '0 0 0 -300px';
-    bsEl.style.padding = '40px 0';
+    bsEl.style.padding = '40px 0 0 0';
     bsEl.style.boxSizing = 'border-box';
     bsEl.style.backgroundColor = '#dddddd';
     bsEl.style.borderRadius = '10px 10px 0 0';
@@ -204,7 +208,14 @@ function browserStitial(error, data, container) {
     bsClose.style.cursor = 'pointer';
     bsClose.style.fontWeight = 'bold';
 
-    bsFooter.style.height = '20px';
+    bsEvent.style.position = 'absolute';
+    bsEvent.style.right = '10px';
+    bsEvent.style.bottom = '10px';
+    bsEvent.style.color = '#cccccc';
+    bsEvent.style.cursor = 'pointer';
+    bsEvent.style.fontWeight = 'bold';
+
+    bsFooter.style.height = '40px';
     bsFooter.style.boxSizing = 'border-box';
     bsFooter.style.borderTop = '1px solid #cccccc';
 
@@ -222,7 +233,7 @@ function browserStitial(error, data, container) {
     bsMessageContent.style.margin = 0;
     bsMessageContent.style.fontSize = '1em';
     bsMessageContent.style.lineHeight = '1.4em';
-    bsMessageContent.style.height = '174px';
+    bsMessageContent.style.height = 'auto';
 
     resizeBrowserStitial();
 
@@ -293,13 +304,27 @@ function browserStitial(error, data, container) {
 
   }
 
+  var fireEvent = function() {
+
+    console.log('Fired');
+
+  }
+
   var startListeners = function() {
     var win = window,
         bsEl = document.querySelector('#bs-container'),
         bsWrapper = document.querySelector('#bs-wrapper'),
-        bsClose = bsEl.querySelector('.bs-close');
+        bsClose = bsEl.querySelector('.bs-close'),
+        bsEvent = bsEl.querySelector('.bs-event');
 
     bsClose.addEventListener('click', self.destroyBrowserStitial);
+
+    bsEvent.addEventListener('click', function() {
+
+      self.destroyBrowserStitial();
+      fireEvent();
+
+    });
 
     bsWrapper.addEventListener('click', self.destroyBrowserStitial);
 
