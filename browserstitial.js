@@ -1,8 +1,8 @@
-function browserStitial(error, data, container, event) {
+function browserStitial(error, data, container, eventCall) {
   this.error = error;
   this.data = data;
   this.container = container;
-  this.event = event;
+  this.eventCall = eventCall;
 
   var self = this;
 
@@ -148,7 +148,7 @@ function browserStitial(error, data, container, event) {
 
     } else if (data) {
       var messagetext = decodeURIComponent(data.messagetext),
-          messagecontent = data.messagecontent,
+          messagecontent = decodeURIComponent(data.messagecontent),
           appkey = data.appkey,
           campaignid = data.campaignid,
           templateid = data.templateid,
@@ -307,7 +307,7 @@ function browserStitial(error, data, container, event) {
 
   var fireEvent = function() {
 
-    this.event();
+    self.eventCall();
 
   }
 
