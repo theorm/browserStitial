@@ -1,7 +1,8 @@
-function browserStitial(error, data, container) {
+function browserStitial(error, data, container, event) {
   this.error = error;
   this.data = data;
   this.container = container;
+  this.event = event;
 
   var self = this;
 
@@ -306,7 +307,7 @@ function browserStitial(error, data, container) {
 
   var fireEvent = function() {
 
-    console.log('Fired');
+    this.event();
 
   }
 
@@ -339,3 +340,5 @@ function browserStitial(error, data, container) {
   return this.createBrowserStitial(this.error, this.data, this.container);
 
 }
+
+module.exports = browserStitial;
