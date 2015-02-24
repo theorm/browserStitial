@@ -1,3 +1,5 @@
+var crel = require('crel');
+
 function browserStitial(error, data, container, eventCall) {
   this.error = error;
   this.data = data;
@@ -340,3 +342,5 @@ function browserStitial(error, data, container, eventCall) {
   return this.createBrowserStitial(this.error, this.data, this.container);
 
 }
+
+module.export = browserStitial;
