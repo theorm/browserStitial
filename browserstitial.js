@@ -343,4 +343,4 @@ function browserStitial(error, data, container, eventCall) {
 
 }
 
-module.export = browserStitial;
+module.exports = browserStitial;
