@@ -1,0 +1,21 @@
+{
+  "name": "browser-stitial",
+  "main": "browserStitial.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/federicobucchi/browserStitial",
+  "authors": [
+    "federicobucchi"
+  ],
+  "description": "Interstitials in the browser",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "crel": "*"
+  }
+}

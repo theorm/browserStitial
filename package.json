@@ -1,0 +1,25 @@
+{
+  "name": "browser-stitial",
+  "version": "0.0.1",
+  "description": "BrowserStitial ==============",
+  "main": "browserstitial.js",
+  "directories": {
+    "example": "example"
+  },
+  "devDependencies": {
+    "blanket": "^1.1.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/federicobucchi/browserStitial.git"
+  },
+  "author": "",
+  "license": " ",
+  "bugs": {
+    "url": "https://github.com/federicobucchi/browserStitial/issues"
+  },
+  "homepage": "https://github.com/federicobucchi/browserStitial"
+}

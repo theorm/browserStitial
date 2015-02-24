@@ -340,5 +340,3 @@ function browserStitial(error, data, container, eventCall) {
   return this.createBrowserStitial(this.error, this.data, this.container);
 
 }
-
-module.exports = browserStitial;
